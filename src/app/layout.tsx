@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import Provider from "@/lib/Provider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -25,7 +26,9 @@ export default function RootLayout({
         <body
           className={`${poppins.className}antialiased min-h-[calc(100vh-1px)] flex flex-col`}
         >
-          <main className="relative flex flex-1 flex-col ">{children}</main>
+          <main className="relative flex flex-1 flex-col ">
+            <Provider>{children}</Provider>
+          </main>
         </body>
       </html>
     </ClerkProvider>
