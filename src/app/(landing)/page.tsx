@@ -8,7 +8,7 @@ function Page() {
   return (
     <div className="w-full  flex flex-col items-center justify-center relative">
       <MaxWidth className="flex  pt-20 items-center gap-12 justify-center  flex-col">
-        <Heading badgeText="Seamlessly track and manage systems">
+        <Heading badgeText="Seamlessly track and manage systems 🚀">
           Simplified Alert & Ticket Management
         </Heading>
         <p className="text-sm md:text-lg max-w-prose text-center ">

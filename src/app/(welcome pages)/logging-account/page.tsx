@@ -1,36 +1,26 @@
 "use client";
 import Heading from "@/components/Heading";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { LucideProps } from "lucide-react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
 import React, { useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
+import axios from "axios";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 function Page() {
-  const { user } = useUser();
-  const router = useRouter();
-  const { data, mutate } = useMutation({
-    mutationFn: async () => {
-      const response = await axios.post("/api/auth/create-user", {
-        name: user?.fullName,
-        email: user?.emailAddresses[0].emailAddress,
-        externalId: user?.id,
-      });
+  const { data } = useQuery({
+    queryKey: ["fetching-user"],
+    queryFn: async () => {
+      const response = await axios.get("/api/auth/login-user");
       return await response.data;
     },
   });
-  useEffect(() => {
-    if (user) {
-      mutate();
-    }
-  }, [user, mutate]);
+  const router = useRouter();
   useEffect(() => {
     if (data?.isSynced) {
       router.push("/dashboard");
-      toast.success("User created successfully", {
+      toast.success("User logged in successfully", {
         className: "text-orange-600",
       });
     }
@@ -42,7 +32,7 @@ function Page() {
       <div className="relative z-10 flex -transalte-y-1/2 flex-col items-center gap-6 text-center">
         <LoadingSpinner size={"md"} />
 
-        <Heading>Creating your account...</Heading>
+        <Heading>Fetching your account...</Heading>
         <p className="text-base/7 text-gray-600 max-w-prose">
           Just a moment while we set things up for you...
         </p>
@@ -148,4 +138,5 @@ const BackgroundPattern = (props: LucideProps) => {
     </svg>
   );
 };
+
 export default Page;

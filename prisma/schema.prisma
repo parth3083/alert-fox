@@ -17,7 +17,7 @@ model User {
   id         String   @id @default(cuid())
   name       String
   email      String   @unique
-  externalId String
+  externalId String?  @unique
   createdAt  DateTime @default(now())
   Ticket     Ticket[]
 }

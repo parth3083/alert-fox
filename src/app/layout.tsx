@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "@/lib/Provider";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -28,6 +29,7 @@ export default function RootLayout({
         >
           <main className="relative flex flex-1 flex-col ">
             <Provider>{children}</Provider>
+            <Toaster/>
           </main>
         </body>
       </html>
