@@ -1,9 +1,9 @@
+import { startMonitoring } from "@/lib/monitorCron";
 import { NextResponse } from "next/server";
-import { monitorSystem } from "@/lib/alertService";
 
 export async function GET() {
   try {
-    await monitorSystem();
+    startMonitoring();
     return NextResponse.json({ message: "System monitoring triggered!" });
   } catch (error) {
     console.error("Error:", error);
