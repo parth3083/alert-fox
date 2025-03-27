@@ -143,7 +143,7 @@ const createAlert = async (
       });
     }
 
-    console.log(`🚨 Alert created: ${type} - ${value.toFixed(2)}%`);
+
   } catch (error) {
     console.error("❌ Error creating alert or ticket:", error);
   }
@@ -164,7 +164,7 @@ const resolveTicket = async (type: string) => {
         where: { id: openTicket.id },
         data: { status: Ticketstatus.CLOSED },
       });
-      console.log(`✅ ${type} issue resolved.`);
+
     }
   } catch (error) {
     console.error("❌ Error resolving ticket:", error);
@@ -243,8 +243,7 @@ export const monitorSystem = async () => {
       }
     }
 
-    // Log uptime
-    console.log(`⏳ Server Uptime: ${serverUptime} seconds`);
+
   } catch (error) {
     console.error("❌ Error monitoring system:", error);
   }
@@ -255,7 +254,7 @@ monitorSystem();
 
 // Graceful Shutdown
 process.on("SIGINT", async () => {
-  console.log("🛑 Shutting down...");
+
   await prisma.$disconnect();
   process.exit(0);
 });
